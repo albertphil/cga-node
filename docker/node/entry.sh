@@ -6,7 +6,7 @@ export PATH
 set -euo pipefail
 IFS=$'\n\t'
 
-network="$(cat /etc/xpeed-network)"
+network="$(cat /etc/cga-network)"
 case "${network}" in
         live|'')
                 network='live'
@@ -21,23 +21,23 @@ case "${network}" in
 esac
 
 
-xpeeddir="${HOME}/Xpeed${dirSuffix}"
-dbFile="${xpeeddir}/data.ldb"
+cgadir="${HOME}/CGA${dirSuffix}"
+dbFile="${cgadir}/data.ldb"
 
 
 
 
 
-	mkdir -p "${xpeeddir}"
+	mkdir -p "${cgadir}"
 
 
-if [ ! -f "${xpeeddir}/config.json" ]; then
+if [ ! -f "${cgadir}/config.json" ]; then
         echo "Config File not found, adding default."
-        cp "/usr/share/xpeed/config/${network}.json" "${xpeeddir}/config.json"
+        cp "/usr/share/cga/config/${network}.json" "${cgadir}/config.json"
 fi
 
 # Start watching the log file we are going to log output to
-logfile="${xpeeddir}/xpeed-docker-output.log"
+logfile="${cgadir}/cga-docker-output.log"
 tail -F "${logfile}" &
 
 pid=''
@@ -60,7 +60,7 @@ while true; do
 				fi
 			done
 
-			xpd_node --vacuum
+			cga_node --vacuum
 		fi
 	fi
 
@@ -71,7 +71,7 @@ while true; do
 	fi
 
 	if [ -z "${pid}" ]; then
-		xpd_node --daemon &
+		cga_node --daemon &
 		pid="$!"
 	fi
 

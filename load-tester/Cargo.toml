@@ -1,5 +1,5 @@
 [package]
-name = "xpeed-load-tester"
+name = "cga-load-tester"
 version = "0.1.0"
 
 [dependencies]

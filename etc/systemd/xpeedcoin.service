@@ -1,12 +1,12 @@
 [Unit]
-Description=Xpeed Daemon live network
+Description=CGA Daemon live network
 After=network.target
 
 [Service]
 Type=simple
-User=xpeedcoin
-WorkingDirectory=/var/xpeedcoin/Xpeed
-ExecStart=/usr/bin/xpd_node --daemon
+User=cgacoin
+WorkingDirectory=/var/cgacoin/CGA
+ExecStart=/usr/bin/cga_node --daemon
 Restart=on-failure
 
 [Install]

@@ -7,15 +7,15 @@
 	<key>NSHighResolutionCapable</key>
 	<string>True</string>
 	<key>CFBundleExecutable</key>
-	<string>xpd_wallet</string>
+	<string>cga_wallet</string>
 	<key>CFBundleName</key>
-	<string>Xpeed</string>
+	<string>CGA</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleIconFile</key>
-	<string>Xpeed.icns</string>
+	<string>CGA.icns</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.xpeed.xpd_wallet</string>
+	<string>org.cga.cga_wallet</string>
 	<key>CFBundleShortVersionString</key>
 	<string>@CPACK_PACKAGE_VERSION_MAJOR@.@CPACK_PACKAGE_VERSION_MINOR@.@CPACK_PACKAGE_VERSION_PATCH@</string>
 	<key>CFBundleVersion</key>

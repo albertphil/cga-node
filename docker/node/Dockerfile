@@ -13,16 +13,16 @@ ADD ./ /tmp/src
 
 RUN mkdir /tmp/build && \
     cd /tmp/build && \
-    cmake /tmp/src -DBOOST_ROOT=${BOOST_ROOT} -DACTIVE_NETWORK=xpd_${NETWORK}_network && \
-    make xpd_node && \
+    cmake /tmp/src -DBOOST_ROOT=${BOOST_ROOT} -DACTIVE_NETWORK=cga_${NETWORK}_network && \
+    make cga_node && \
     cd .. && \
-    echo ${NETWORK} > /etc/xpeed-network
+    echo ${NETWORK} > /etc/cga-network
 
 FROM ubuntu:16.04
-COPY --from=0 /tmp/build/xpd_node /usr/bin
-COPY --from=0 /etc/xpeed-network /etc
+COPY --from=0 /tmp/build/cga_node /usr/bin
+COPY --from=0 /etc/cga-network /etc
 COPY docker/node/entry.sh /entry.sh
-COPY docker/node/config /usr/share/xpeed/config
+COPY docker/node/config /usr/share/cga/config
 RUN chmod +x /entry.sh
-RUN ln -s /usr/bin/xpd_node /usr/bin/rai_node
+RUN ln -s /usr/bin/cga_node /usr/bin/rai_node
 CMD ["/bin/bash",  "/entry.sh"]

@@ -3,11 +3,11 @@ set -e
 
 scripts="$(dirname "$0")"
 
-echo "$DOCKER_PASSWORD" | docker login -u xpeedreleaseteam --password-stdin
+echo "$DOCKER_PASSWORD" | docker login -u cgareleaseteam --password-stdin
 
 # We push this just so it can be a cache next time
 if [ "$TRAVIS_BRANCH" = "master" ]; then
-    "$scripts"/custom-timeout.sh 30 docker push xpeedcoin/xpeed-ci
+    "$scripts"/custom-timeout.sh 30 docker push cgacoin/cga-ci
 fi
 
 tags=()
@@ -26,7 +26,7 @@ for network in live beta; do
         network_tag_suffix="-${network}"
     fi
 
-    docker_image_name="xpeedcoin/xpeed${network_tag_suffix}"
+    docker_image_name="cgacoin/cga${network_tag_suffix}"
 
     "$scripts"/custom-timeout.sh 30 docker build --build-arg NETWORK="$network" -f docker/node/Dockerfile -t "$docker_image_name" .
     for tag in "${tags[@]}"; do

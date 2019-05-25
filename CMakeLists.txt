@@ -1,28 +1,28 @@
 cmake_minimum_required (VERSION 3.4)
-project (xpeed-node)
+project (cga-node)
 
 set (CPACK_PACKAGE_VERSION_MAJOR "18")
 set (CPACK_PACKAGE_VERSION_MINOR "0")
 set (CPACK_PACKAGE_VERSION_PATCH "0")
-set (CPACK_PACKAGE_VENDOR "Xpeed Coin")
+set (CPACK_PACKAGE_VENDOR "CGA Coin")
 
 set(CMAKE_INSTALL_RPATH "@executable_path/../Frameworks")
 # Create all libraries and executables in the root binary dir
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
-set (XPD_GUI OFF CACHE BOOL "")
-set (XPD_TEST OFF CACHE BOOL "")
-set (XPD_SECURE_RPC OFF CACHE BOOL "")
+set (CGA_GUI OFF CACHE BOOL "")
+set (CGA_TEST OFF CACHE BOOL "")
+set (CGA_SECURE_RPC OFF CACHE BOOL "")
 
-option(XPD_ASAN_INT "Enable ASan+UBSan+Integer overflow" OFF)
-option(XPD_ASAN "Enable ASan+UBSan" OFF)
-option(XPD_TSAN "Enable TSan" OFF)
-option(XPD_SIMD_OPTIMIZATIONS "Enable CPU-specific SIMD optimizations (SSE/AVX or NEON, e.g.)" OFF)
-option(ENABLE_AES "Enable AES optimizations (enabled by default with XPD_SIMD_OPTIMIZATIONS, set OFF to disable" ON)
+option(CGA_ASAN_INT "Enable ASan+UBSan+Integer overflow" OFF)
+option(CGA_ASAN "Enable ASan+UBSan" OFF)
+option(CGA_TSAN "Enable TSan" OFF)
+option(CGA_SIMD_OPTIMIZATIONS "Enable CPU-specific SIMD optimizations (SSE/AVX or NEON, e.g.)" OFF)
+option(ENABLE_AES "Enable AES optimizations (enabled by default with CGA_SIMD_OPTIMIZATIONS, set OFF to disable" ON)
 option(ENABLE_AVX2 "Enable AVX2 optimizations" OFF)
 
-SET (ACTIVE_NETWORK xpd_live_network CACHE STRING "Selects which network parameters are used")
-set_property (CACHE ACTIVE_NETWORK PROPERTY STRINGS xpd_test_network xpd_beta_network xpd_live_network)
+SET (ACTIVE_NETWORK cga_live_network CACHE STRING "Selects which network parameters are used")
+set_property (CACHE ACTIVE_NETWORK PROPERTY STRINGS cga_test_network cga_beta_network cga_live_network)
 
 if(NOT CMAKE_BUILD_TYPE)
 	set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose the type of build, options are: Debug Release RelWithDebInfo MinSizeRel." FORCE)
@@ -40,13 +40,13 @@ if (WIN32)
 					-D_CRT_SECURE_NO_WARNINGS)
 else ()
 	add_compile_options(-Werror=switch)
-	if (XPD_ASAN)
+	if (CGA_ASAN)
 		add_compile_options(-fsanitize=address,undefined)
 		add_definitions(-DED25519_NO_INLINE_ASM)
-	elseif (XPD_ASAN_INT)
+	elseif (CGA_ASAN_INT)
 		add_compile_options(-fsanitize=address,undefined,integer)
 		add_definitions(-DED25519_NO_INLINE_ASM)
-	elseif (XPD_TSAN)
+	elseif (CGA_TSAN)
 		add_compile_options(-fsanitize=thread)
 		if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 			add_compile_options("-fsanitize-blacklist=${PROJECT_SOURCE_DIR}/tsan_blacklist")
@@ -55,7 +55,7 @@ else ()
 	endif()
 
 	if (CMAKE_SYSTEM_PROCESSOR MATCHES "^(i.86|x86(_64)?)$")
-		if (XPD_SIMD_OPTIMIZATIONS)
+		if (CGA_SIMD_OPTIMIZATIONS)
 			add_compile_options(-msse4)
 			if (ENABLE_AES)
 				add_compile_options(-maes)
@@ -77,7 +77,7 @@ else ()
 			endif()
 		endif()
 	elseif (CMAKE_SYSTEM_PROCESSOR STREQUAL "aarch64")
-		if (XPD_SIMD_OPTIMIZATIONS)
+		if (CGA_SIMD_OPTIMIZATIONS)
 			add_compile_options(-march=armv8-a+crc+crypto)
 		else ()
 			add_compile_options(-march=armv8-a)
@@ -104,11 +104,11 @@ else ()
 		set (PLATFORM_LINK_FLAGS "-static-libgcc -static-libstdc++")
 	endif ()
 
-	if (XPD_ASAN)
+	if (CGA_ASAN)
 		set (PLATFORM_LINK_FLAGS "${PLATFORM_LINK_FLAGS} -fsanitize=address,undefined")
-	elseif (XPD_ASAN_INT)
+	elseif (CGA_ASAN_INT)
 		set (PLATFORM_LINK_FLAGS "${PLATFORM_LINK_FLAGS} -fsanitize=address,undefined,integer")
-	elseif (XPD_TSAN)
+	elseif (CGA_TSAN)
 		set (PLATFORM_LINK_FLAGS "${PLATFORM_LINK_FLAGS} -fsanitize=thread")
 		if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 			set (PLATFORM_LINK_FLAGS "${PLATFORM_LINK_FLAGS} -fsanitize-blacklist=${PROJECT_SOURCE_DIR}/tsan_blacklist")
@@ -118,10 +118,10 @@ endif ()
 
 SET( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${PLATFORM_LINK_FLAGS}" )
 
-if (XPD_SECURE_RPC)
+if (CGA_SECURE_RPC)
 	find_package (OpenSSL 1.0 REQUIRED)
 	include_directories(${OPENSSL_INCLUDE_DIR})
-	add_definitions (-DXPD_SECURE_RPC)
+	add_definitions (-DCGA_SECURE_RPC)
 	message("OpenSSL include dir: ${OPENSSL_INCLUDE_DIR}")
 	message("OpenSSL libraries: ${OPENSSL_LIBRARIES}")
 	message("OpenSSL lib: ${OPENSSL_SSL_LIBRARY}")
@@ -162,7 +162,7 @@ if (WIN32)
 	# similar to SSE2 settings
 	add_definitions(-DCRYPTOPP_DISABLE_SSSE3
 					-DCRYPTOPP_DISABLE_AESNI)
-elseif (CMAKE_SYSTEM_PROCESSOR STREQUAL "aarch64" AND (XPD_SIMD_OPTIMIZATIONS))
+elseif (CMAKE_SYSTEM_PROCESSOR STREQUAL "aarch64" AND (CGA_SIMD_OPTIMIZATIONS))
 	set (CRYPTOPP_EXTRA crypto/cryptopp/crc_simd.cpp
 					crypto/cryptopp/gcm_simd.cpp
 					crypto/cryptopp/gf2n_simd.cpp
@@ -223,7 +223,7 @@ add_library (cryptopp
 	crypto/cryptopp/sse_simd.cpp
 	${CRYPTOPP_EXTRA})
 
-if ((XPD_SIMD_OPTIMIZATIONS) AND NOT CMAKE_SYSTEM_PROCESSOR STREQUAL "aarch64")
+if ((CGA_SIMD_OPTIMIZATIONS) AND NOT CMAKE_SYSTEM_PROCESSOR STREQUAL "aarch64")
 	set (ARGON_CORE crypto/phc-winner-argon2/src/opt.c)
 else ()
 	set (ARGON_CORE crypto/phc-winner-argon2/src/ref.c)
@@ -272,12 +272,12 @@ add_library (blake2
 
 target_compile_definitions(blake2 PRIVATE -D__SSE2__)
 
-add_subdirectory(xpeed/secure)
-add_subdirectory(xpeed/lib)
-add_subdirectory(xpeed/node)
-add_subdirectory(xpeed/xpd_node)
+add_subdirectory(cga/secure)
+add_subdirectory(cga/lib)
+add_subdirectory(cga/node)
+add_subdirectory(cga/cga_node)
 
-if (XPD_TEST)
+if (CGA_TEST)
     if(WIN32)
         if(MSVC_VERSION)
             if(MSVC_VERSION GREATER_EQUAL 1910)
@@ -297,11 +297,11 @@ if (XPD_TEST)
 	set_target_properties(gtest PROPERTIES INTERFACE_INCLUDE_DIRECTORIES
 		"${CMAKE_SOURCE_DIR}/gtest/include")
 
-	add_subdirectory(xpeed/core_test)
-	add_subdirectory(xpeed/slow_test)
+	add_subdirectory(cga/core_test)
+	add_subdirectory(cga/slow_test)
 endif ()
 
-if (XPD_GUI)
+if (CGA_GUI)
 	if (WIN32)
 		set (PLATFORM_QT_PACKAGES WinExtras)
 	else ()
@@ -311,17 +311,17 @@ if (XPD_GUI)
 	find_package (Qt5 COMPONENTS Core Gui Widgets Test ${PLATFORM_QT_PACKAGES})
 
 	add_library (qt
-		xpeed/qt/qt.cpp
-		xpeed/qt/qt.hpp)
+		cga/qt/qt.cpp
+		cga/qt/qt.hpp)
 
 	target_link_libraries(qt
-		secure xpd_lib node libminiupnpc-static Qt5::Gui Qt5::Widgets)
+		secure cga_lib node libminiupnpc-static Qt5::Gui Qt5::Widgets)
 
 	target_compile_definitions(qt
 		PRIVATE
-		-DXPD_VERSION_MAJOR=${CPACK_PACKAGE_VERSION_MAJOR}
-		-DXPD_VERSION_MINOR=${CPACK_PACKAGE_VERSION_MINOR}
-		-DXPD_VERSION_PATCH=${CPACK_PACKAGE_VERSION_PATCH})
+		-DCGA_VERSION_MAJOR=${CPACK_PACKAGE_VERSION_MAJOR}
+		-DCGA_VERSION_MINOR=${CPACK_PACKAGE_VERSION_MINOR}
+		-DCGA_VERSION_PATCH=${CPACK_PACKAGE_VERSION_PATCH})
 
 	if (WIN32)
 		set (PLATFORM_GUI_TARGET_PROPERTIES WIN32)
@@ -330,50 +330,50 @@ if (XPD_GUI)
 	endif ()
 
 	if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-		set (PLATFORM_WALLET_SOURCE xpeed/xpd_wallet/plat/default/icon.cpp)
+		set (PLATFORM_WALLET_SOURCE cga/cga_wallet/plat/default/icon.cpp)
 	elseif (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
-		set (PLATFORM_WALLET_SOURCE xpeed/xpd_wallet/plat/windows/icon.cpp Xpeed.rc)
+		set (PLATFORM_WALLET_SOURCE cga/cga_wallet/plat/windows/icon.cpp CGA.rc)
 	elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-		set (PLATFORM_WALLET_SOURCE xpeed/xpd_wallet/plat/default/icon.cpp)
+		set (PLATFORM_WALLET_SOURCE cga/cga_wallet/plat/default/icon.cpp)
 	elseif (${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
-		set (PLATFORM_WALLET_SOURCE xpeed/xpd_wallet/plat/default/icon.cpp)
+		set (PLATFORM_WALLET_SOURCE cga/cga_wallet/plat/default/icon.cpp)
 	else ()
 		error ("Unknown platform: ${CMAKE_SYSTEM_NAME}")
 	endif ()
 
 	qt5_add_resources(RES resources.qrc)
 
-	add_executable (xpd_wallet ${PLATFORM_GUI_TARGET_PROPERTIES}
+	add_executable (cga_wallet ${PLATFORM_GUI_TARGET_PROPERTIES}
 		${PLATFORM_WALLET_SOURCE}
-		xpeed/xpd_wallet/entry.cpp
-		xpeed/xpd_wallet/icon.hpp
+		cga/cga_wallet/entry.cpp
+		cga/cga_wallet/icon.hpp
 		${RES})
 
-	target_link_libraries (xpd_wallet
+	target_link_libraries (cga_wallet
 		node
 		qt)
 
 	if (WIN32)
-		target_link_libraries (xpd_wallet Qt5::WinExtras)
-		# xpd_wallet.com executable for Windows console
-		add_executable(xpd_wallet_com
-			xpeed/xpd_wallet/entry_com.cpp)
-		target_link_libraries (xpd_wallet_com
+		target_link_libraries (cga_wallet Qt5::WinExtras)
+		# cga_wallet.com executable for Windows console
+		add_executable(cga_wallet_com
+			cga/cga_wallet/entry_com.cpp)
+		target_link_libraries (cga_wallet_com
 			node)
-		set_target_properties (xpd_wallet_com PROPERTIES COMPILE_FLAGS "-DBOOST_ASIO_HAS_STD_ARRAY=1" OUTPUT_NAME "xpd_wallet" SUFFIX ".com")
+		set_target_properties (cga_wallet_com PROPERTIES COMPILE_FLAGS "-DBOOST_ASIO_HAS_STD_ARRAY=1" OUTPUT_NAME "cga_wallet" SUFFIX ".com")
 	endif()
 
 	add_executable (qt_system
-		xpeed/qt_system/entry.cpp)
+		cga/qt_system/entry.cpp)
 
 	target_link_libraries (qt_system qt node Qt5::Gui Qt5::Widgets)
 
-	set_target_properties (qt xpd_wallet qt_system PROPERTIES COMPILE_FLAGS "-DQT_NO_KEYWORDS -DBOOST_ASIO_HAS_STD_ARRAY=1")
+	set_target_properties (qt cga_wallet qt_system PROPERTIES COMPILE_FLAGS "-DQT_NO_KEYWORDS -DBOOST_ASIO_HAS_STD_ARRAY=1")
 
-	if (XPD_TEST)
+	if (CGA_TEST)
 		add_executable (qt_test
-			xpeed/qt_test/entry.cpp
-			xpeed/qt_test/qt.cpp)
+			cga/qt_test/entry.cpp
+			cga/qt_test/qt.cpp)
 
 		target_link_libraries(qt_test gtest gtest_main qt Qt5::Test)
 
@@ -382,16 +382,16 @@ if (XPD_GUI)
 
 	if (APPLE)
 		CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/Info.plist.in ${CMAKE_SOURCE_DIR}/Info.plist @ONLY)
-		install (TARGETS xpd_wallet DESTINATION Xpeed.app/Contents/MacOS)
-		install (FILES Info.plist DESTINATION Xpeed.app/Contents)
-		install (FILES qt.conf DESTINATION Xpeed.app/Contents/Resources)
-		install (DIRECTORY ${Qt5_DIR}/../../QtCore.framework DESTINATION Xpeed.app/Contents/Frameworks)
-		install (DIRECTORY ${Qt5_DIR}/../../QtGui.framework DESTINATION Xpeed.app/Contents/Frameworks)
-		install (DIRECTORY ${Qt5_DIR}/../../QtPrintSupport.framework DESTINATION Xpeed.app/Contents/Frameworks)
-		install (DIRECTORY ${Qt5_DIR}/../../QtTest.framework DESTINATION Xpeed.app/Contents/Frameworks)
-		install (DIRECTORY ${Qt5_DIR}/../../QtWidgets.framework DESTINATION Xpeed.app/Contents/Frameworks)
-		install (FILES "${Qt5_DIR}/../../../plugins/platforms/libqcocoa.dylib" DESTINATION Xpeed.app/Contents/PlugIns/platforms)
-		install (FILES Xpeed.icns DESTINATION Xpeed.app/Contents/Resources)
+		install (TARGETS cga_wallet DESTINATION CGA.app/Contents/MacOS)
+		install (FILES Info.plist DESTINATION CGA.app/Contents)
+		install (FILES qt.conf DESTINATION CGA.app/Contents/Resources)
+		install (DIRECTORY ${Qt5_DIR}/../../QtCore.framework DESTINATION CGA.app/Contents/Frameworks)
+		install (DIRECTORY ${Qt5_DIR}/../../QtGui.framework DESTINATION CGA.app/Contents/Frameworks)
+		install (DIRECTORY ${Qt5_DIR}/../../QtPrintSupport.framework DESTINATION CGA.app/Contents/Frameworks)
+		install (DIRECTORY ${Qt5_DIR}/../../QtTest.framework DESTINATION CGA.app/Contents/Frameworks)
+		install (DIRECTORY ${Qt5_DIR}/../../QtWidgets.framework DESTINATION CGA.app/Contents/Frameworks)
+		install (FILES "${Qt5_DIR}/../../../plugins/platforms/libqcocoa.dylib" DESTINATION CGA.app/Contents/PlugIns/platforms)
+		install (FILES CGA.icns DESTINATION CGA.app/Contents/Resources)
 	elseif (WIN32)
 		if ("${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
 			set (WIN_REDIST vc_redist.x64.exe)
@@ -399,18 +399,18 @@ if (XPD_GUI)
 			set (WIN_REDIST vc_redist.x86.exe)
 		endif ()
 		set (CPACK_NSIS_EXTRA_INSTALL_COMMANDS "ExecWait '\\\"$INSTDIR\\\\${WIN_REDIST}\\\" /quiet /norestart'")
-		set (CPACK_NSIS_MUI_ICON ${CMAKE_SOURCE_DIR}/Xpeed.ico)
-		set (CPACK_NSIS_DISPLAY_NAME "Xpeed")
-		set (CPACK_PACKAGE_NAME "Xpd_Installer")
-		set (CPACK_NSIS_PACKAGE_NAME "Xpeed ${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}.${CPACK_PACKAGE_VERSION_PATCH}")
-		set (CPACK_NSIS_URL_INFO_ABOUT "https://xpeedcoin.com")
-		set (CPACK_NSIS_CONTACT "hello@xpeedcoin.com")
-		set (CPACK_NSIS_MENU_LINKS "xpd_wallet.exe" "Xpeed Wallet" "https://xpeedcoin.com" "Xpeed website")
+		set (CPACK_NSIS_MUI_ICON ${CMAKE_SOURCE_DIR}/CGA.ico)
+		set (CPACK_NSIS_DISPLAY_NAME "CGA")
+		set (CPACK_PACKAGE_NAME "CGA_Installer")
+		set (CPACK_NSIS_PACKAGE_NAME "CGA ${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}.${CPACK_PACKAGE_VERSION_PATCH}")
+		set (CPACK_NSIS_URL_INFO_ABOUT "https://cgaio.com")
+		set (CPACK_NSIS_CONTACT "hello@cgaio.com")
+		set (CPACK_NSIS_MENU_LINKS "cga_wallet.exe" "CGA Wallet" "https://cgaio.com" "CGA website")
 		set (CPACK_NSIS_ENABLE_UNINSTALL_BEFORE_INSTALL ON)
 		get_target_property (Qt5WindowsPlugin Qt5::QWindowsIntegrationPlugin LOCATION)
 		get_filename_component (Qt5_bin_DIR ${Qt5_DIR}/../../../bin ABSOLUTE)
-		install (TARGETS xpd_wallet DESTINATION .)
-		install (TARGETS xpd_wallet_com DESTINATION .)
+		install (TARGETS cga_wallet DESTINATION .)
+		install (TARGETS cga_wallet_com DESTINATION .)
 		install (FILES ${CMAKE_CURRENT_BINARY_DIR}/${WIN_REDIST} DESTINATION .)
 		install (FILES ${Qt5_bin_DIR}/libGLESv2.dll DESTINATION .)
 		install (FILES ${Qt5_bin_DIR}/Qt5Core.dll DESTINATION .)
@@ -419,7 +419,7 @@ if (XPD_GUI)
 		install (FILES ${Qt5_bin_DIR}/Qt5WinExtras.dll DESTINATION .)
 		install (FILES ${Qt5WindowsPlugin} DESTINATION platforms)
 	else ()
-		install(TARGETS xpd_wallet
+		install(TARGETS cga_wallet
 				RUNTIME DESTINATION bin
 				LIBRARY DESTINATION lib
 				ARCHIVE DESTINATION lib
