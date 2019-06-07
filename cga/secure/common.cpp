@@ -40,11 +40,11 @@ char const * beta_genesis_data = R"%%%({
 
 char const * live_genesis_data = R"%%%({
 	"type": "open",
-	"source": "A4BE0D749685899AA92035D657CABCFE8CDC4A9F4051DB1F64073BB89A8C2C2D",
-	"representative": "cga_3b7y3otbf3ebmcnk1fgpcz7dszneuj7byi4juehpa3suq4fard3fm5os9ykn",
-	"account": "cga_3b7y3otbf3ebmcnk1fgpcz7dszneuj7byi4juehpa3suq4fard3fm5os9ykn",
-	"work": "537d0ab391864324",
-	"signature": "427C22A6019D275D23476284A5AB301775E32BC21EC143048D5B72A5AD1140DA60E0597BD882591BA4B0A3F6EBE6C20FEA42931337167BAEA216F3CDAB0CB004"
+	"source": "7A28A31A42E18F374805E8C5E1D33565EB899DF7AF26A3F72A7DD1FA049BEC66",
+	"representative": "cga_1yjanef67reh8x61dt87w9bmcshdj8gzhds8nhuknzgjza4bqu58xb9pk3ua",
+	"account": "cga_1yjanef67reh8x61dt87w9bmcshdj8gzhds8nhuknzgjza4bqu58xb9pk3ua",
+	"work": "cfb01905568192ff",
+	"signature": "9E37F37CFFE22F080A9A7244DC6C28D00B91B7A3A3DF228D8BFE8142874E5EB94D6A100EA334FA2464F61B2EA980D089FAF7A89099A0139598EEE53E293EB709"
 })%%%";
 
 class ledger_constants

@@ -358,7 +358,7 @@ public:
 	std::vector<boost::thread> packet_processing_threads;
 	cga::node & node;
 	std::atomic<bool> on;
-	static uint16_t const node_port = cga::is_live_network ? 7077 : 54000;
+	static uint16_t const node_port = cga::is_live_network ? 7032 : 54000;
 	static size_t const buffer_size = 512;
 	static size_t const confirm_req_hashes_max = 6;
 };
