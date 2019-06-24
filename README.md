@@ -36,15 +36,15 @@ For more information, see [CGACoin.com](https://cgaio.com/) or read the [whitepa
 sudo ln -s /home/hanvisuser/cga-node/bin/cga_node /usr/local/sbin/cga_node
 
 
----
+```
 
 sudo touch /etc/systemd/system/cga_node.service
 sudo chmod 664 /etc/systemd/system/cga_node.service
 sudo nano /etc/systemd/system/cga_node.service
 
----
+```
 
----
+```
 
 [Unit]
 Description=CGA node service
@@ -60,12 +60,12 @@ Group=hanvisuser
 [Install]
 WantedBy=multi-user.target
 
----
+```
 
 
----
+```
 
 sudo service cga_node start
 sudo systemctl enable cga_node
 
----
+```
