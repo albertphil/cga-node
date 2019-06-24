@@ -27,3 +27,45 @@ For more information, see [CGACoin.com](https://cgaio.com/) or read the [whitepa
 
 * [CGA Website](https://cgaio.com)
 
+
+
+
+### Setting
+
+
+sudo ln -s /home/hanvisuser/cga-node/bin/cga_node /usr/local/sbin/cga_node
+
+
+---
+
+sudo touch /etc/systemd/system/cga_node.service
+sudo chmod 664 /etc/systemd/system/cga_node.service
+sudo nano /etc/systemd/system/cga_node.service
+
+---
+
+---
+
+[Unit]
+Description=CGA node service
+After=network.target
+
+[Service]
+ExecStart=/home/hanvisuser/cga-node/bin/cga_node --daemon
+LimitNOFILE=65536
+Restart=on-failure
+User=hanvisuser
+Group=hanvisuser
+
+[Install]
+WantedBy=multi-user.target
+
+---
+
+
+---
+
+sudo service cga_node start
+sudo systemctl enable cga_node
+
+---
