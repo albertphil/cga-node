@@ -1,0 +1,18 @@
+sudo iptables -A INPUT -i lo -j ACCEPT
+sudo iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+
+sudo iptables -A INPUT -p tcp -s 35.221.218.178 --dport 7132 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+sudo iptables -A INPUT -p tcp -s 35.236.171.4 --dport 7132 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+sudo iptables -A INPUT -p tcp -s 35.221.238.247 --dport 7132 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+sudo iptables -A INPUT -p tcp -s 35.229.171.238 --dport 7132 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+sudo iptables -A INPUT -p tcp -s 34.80.24.180 --dport 7132 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+sudo iptables -A INPUT -p tcp -s 0.0.0.0/0 --dport 7132 -j DROP
+
+
+sudo iptables -A INPUT -p udp -s 35.221.218.178 --dport 7132 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+sudo iptables -A INPUT -p udp -s 35.236.171.4 --dport 7132 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+sudo iptables -A INPUT -p udp -s 35.221.238.247 --dport 7132 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+sudo iptables -A INPUT -p udp -s 35.229.171.238 --dport 7132 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+sudo iptables -A INPUT -p udp -s 34.80.24.180 --dport 7132 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+sudo iptables -A INPUT -p udp -s 0.0.0.0/0 --dport 7132 -j DROP

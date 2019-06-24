@@ -195,7 +195,7 @@ public:
 	bool deserialize (cga::stream &);
 	cga::block_type block_type () const;
 	void block_type_set (cga::block_type);
-	static std::array<uint8_t, 2> constexpr magic_number = cga::is_test_network ? std::array<uint8_t, 2>{ { 'X', 'T' } } : cga::is_beta_network ? std::array<uint8_t, 2>{ { 'X', 'B' } } : std::array<uint8_t, 2>{ { 'X', 'P' } };
+	static std::array<uint8_t, 2> constexpr magic_number = cga::is_test_network ? std::array<uint8_t, 2>{ { 'X', 'T' } } : cga::is_beta_network ? std::array<uint8_t, 2>{ { 'X', 'B' } } : std::array<uint8_t, 2>{ { 'X', 'Q' } };
 	uint8_t version_max;
 	uint8_t version_using;
 	uint8_t version_min;
@@ -211,7 +211,7 @@ public:
 	static std::bitset<16> constexpr block_type_mask = std::bitset<16> (0x0f00);
 	bool valid_magic () const
 	{
-		return magic_number[0] == 'X' && (magic_number[1] == 'T' || magic_number[1] == 'B' || magic_number[1] == 'P');
+		return magic_number[0] == 'X' && (magic_number[1] == 'T' || magic_number[1] == 'B' || magic_number[1] == 'Q');
 	}
 	bool valid_network () const
 	{
