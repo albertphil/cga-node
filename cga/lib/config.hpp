@@ -18,7 +18,7 @@ enum class cga_networks
 	cga_beta_network = 18,
 	
 	// Normal work parameters, secret live key, live IP ports
-	cga_live_network = 4,
+	cga_live_network = 3,
 	
 };
 cga::cga_networks constexpr cga_network = cga_networks::ACTIVE_NETWORK;
