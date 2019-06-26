@@ -8,8 +8,8 @@ namespace
 {
 const char * preconfigured_peers_key = "preconfigured_peers";
 const char * signature_checker_threads_key = "signature_checker_threads";
-const char * default_beta_peer_network = "peering-beta.cgaapp.com";
-const char * default_live_peer_network = "peering.cgaapp.com";
+const char * default_beta_peer_network = "peering-beta.cgaco.net";
+const char * default_live_peer_network = "peering.cgaco.net";
 }
 
 cga::node_config::node_config () :
@@ -58,14 +58,12 @@ unchecked_cutoff_time (std::chrono::seconds (4 * 60 * 60)) // 4 hours
 			break;
 		case cga::cga_networks::cga_live_network:
 			preconfigured_peers.push_back (default_live_peer_network);
-			preconfigured_representatives.emplace_back ("4C82F4094DC88056ACBF2007357CC21C53B624C257F7599FC146166CDA537213");
-			preconfigured_representatives.emplace_back ("7659FD1424CFEAC23DFEE15E1AD865C342495F81E9B05FB9FA356A078DD33083");
-			preconfigured_representatives.emplace_back ("CE04E14A96B4265EA18508CD6F4B5ADF5D33466B5A41D69F727F0AC58C9BF668");
-			preconfigured_representatives.emplace_back ("0D5644FC0A1DDE495E5AFE97B6349036050A575E7E6A1FF95B1D6383754DF4DA");
-			preconfigured_representatives.emplace_back ("D5957AEC4C4C617523A471EAE7B78AA815DEA9E25E97D1EEB2E0DAC41C76D50D");
-			preconfigured_representatives.emplace_back ("57296293C16E2D1627C1F8A770837C4A3DD8AB5CCCD1F57B5EDAA9B5BCE30FA1");
-			preconfigured_representatives.emplace_back ("E63EC2BD38FC6AA85A05B474C1087598D5E4068919A8875E5457612176EF5BA9");
-			preconfigured_representatives.emplace_back ("CCF4AF55A7129D230CB19B2735BF491BCE921FFCA91603F04BA8E59DF1A50C2D");
+			preconfigured_representatives.emplace_back ("63DD0C9E06838EB45C5357C6F0BFA6C83FE3E2844C8D08FC976F256577D6BAF2");
+			preconfigured_representatives.emplace_back ("8AD11E00C8813EF5207EE417810138C33A0B52F43DE06AE163632D415CABE687");
+			preconfigured_representatives.emplace_back ("478D43807FCB4467DED3325DD005EA35CAA0DAC9AC2E08E01F6401454CB6B2AA");
+			preconfigured_representatives.emplace_back ("DF2DE43C9CEDC6D31278419A80BC6D23AC060186FF357B293DF59C04996AB35D");
+			preconfigured_representatives.emplace_back ("312BC607B5614F7C77019267CB6EF6083AD51AAB0822676DCBDAC724241DC622");
+			preconfigured_representatives.emplace_back ("BB134DA98DFA9025F50B66AA1FB95B613A0EBC6BD929133297A283FC59608D58");
 			break;
 		default:
 			assert (false);
@@ -221,11 +219,11 @@ bool cga::node_config::upgrade_json (unsigned version_a, cga::jsonconfig & json)
 			auto peers_l (json.get_required_child (preconfigured_peers_key));
 			cga::jsonconfig peers;
 			peers_l.array_entries<std::string> ([&peers](std::string entry) {
-				if (entry == "peering-beta.cgaapp.com")
+				if (entry == "peering-beta.cgaco.net")
 				{
 					entry = default_beta_peer_network;
 				}
-				else if (entry == "peering.cgaapp.com")
+				else if (entry == "peering.cgaco.net")
 				{
 					entry = default_live_peer_network;
 				}
