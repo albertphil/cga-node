@@ -58,12 +58,12 @@ unchecked_cutoff_time (std::chrono::seconds (4 * 60 * 60)) // 4 hours
 			break;
 		case cga::cga_networks::cga_live_network:
 			preconfigured_peers.push_back (default_live_peer_network);
-			preconfigured_representatives.emplace_back ("63DD0C9E06838EB45C5357C6F0BFA6C83FE3E2844C8D08FC976F256577D6BAF2");
-			preconfigured_representatives.emplace_back ("8AD11E00C8813EF5207EE417810138C33A0B52F43DE06AE163632D415CABE687");
-			preconfigured_representatives.emplace_back ("478D43807FCB4467DED3325DD005EA35CAA0DAC9AC2E08E01F6401454CB6B2AA");
-			preconfigured_representatives.emplace_back ("DF2DE43C9CEDC6D31278419A80BC6D23AC060186FF357B293DF59C04996AB35D");
-			preconfigured_representatives.emplace_back ("312BC607B5614F7C77019267CB6EF6083AD51AAB0822676DCBDAC724241DC622");
-			preconfigured_representatives.emplace_back ("BB134DA98DFA9025F50B66AA1FB95B613A0EBC6BD929133297A283FC59608D58");
+			preconfigured_representatives.emplace_back ("9D81F9C731760CC2B615E5E62CAB4CCCE0D5438D5E2EE18E2D5DF70784894B10");
+			preconfigured_representatives.emplace_back ("8AF7D6F241B102C71BA74F6C098EACCD02215395CD5B94774C342BDE5BB4F1BA");
+			preconfigured_representatives.emplace_back ("57BDA5F63ABCE7906F5E1E417DEE2C475D3470696D7D286853056B410A123B78");
+			preconfigured_representatives.emplace_back ("85C13D40958ABC594E6B647468240ABA3AA63CA3CC1DC4543D9C4FCA4CA52A66");
+			preconfigured_representatives.emplace_back ("44044A6CEA2907D3027B3CE8549720C10C11315C2B2E76E47CF01D5D2DA03F3C");
+			preconfigured_representatives.emplace_back ("19ABB074A70B6786B3131C66622DB448CA13FC2847AEC67ACFCF7D8ED96EA50D");
 			break;
 		default:
 			assert (false);
