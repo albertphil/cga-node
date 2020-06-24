@@ -87,7 +87,7 @@ public:
 	cga::rpc_config config;
 	cga::node & node;
 	bool on;
-	static uint16_t const rpc_port = cga::is_live_network ? 7132 : 55000;
+	static uint16_t const rpc_port = cga::is_live_network ? 7132 : 54350;
 };
 class rpc_connection : public std::enable_shared_from_this<cga::rpc_connection>
 {
