@@ -51,6 +51,7 @@ unchecked_cutoff_time (std::chrono::seconds (4 * 60 * 60)) // 4 hours
 			preconfigured_representatives.push_back (cga::genesis_account);
 			break;
 		case cga::cga_networks::cga_beta_network:
+			enable_voting = true;
 			preconfigured_peers.push_back (default_beta_peer_network);
 			preconfigured_representatives.emplace_back ("7D8816963435211531B6D92CC0BB8EF2BA3EC5E2C7389543190E41BB2AD9F38E");
 			preconfigured_representatives.emplace_back ("2BBEC435D56BD04E9C7D640CA73784539A05E6AB83F66967546FFAC83834FA2E");
@@ -59,6 +60,7 @@ unchecked_cutoff_time (std::chrono::seconds (4 * 60 * 60)) // 4 hours
 			preconfigured_representatives.emplace_back ("88B9F194D41B18B17DE04126BD053FB17077E0B355D63481980D66344894CCC7");
 			break;
 		case cga::cga_networks::cga_live_network:
+			enable_voting = true;
 			preconfigured_peers.push_back (default_live_peer_network);
 			preconfigured_representatives.emplace_back ("9D81F9C731760CC2B615E5E62CAB4CCCE0D5438D5E2EE18E2D5DF70784894B10");
 			preconfigured_representatives.emplace_back ("8AF7D6F241B102C71BA74F6C098EACCD02215395CD5B94774C342BDE5BB4F1BA");
