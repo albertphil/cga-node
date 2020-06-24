@@ -52,7 +52,7 @@ if [[ ${FLAVOR-_} == "_" ]]; then
     FLAVOR=""
 fi
 
-NETWORK_CFG="-DACTIVE_NETWORK=cga_live_network"
+NETWORK_CFG="-DACTIVE_NETWORK=cga_beta_network"
 CONFIGURATION="Release"
 
 

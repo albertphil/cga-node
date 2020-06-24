@@ -8,7 +8,7 @@ configuration: Release
 platform: x64
 environment:
   matrix:
-    - network: cga_live_network
+    - network: cga_beta_network
       configuration: Release
 clone_folder: C:\projects\myproject
 install:
