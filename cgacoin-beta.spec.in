@@ -33,13 +33,13 @@ fi
 
 %build
 cmake -DCMAKE_VERBOSE_MAKEFILE=ON -DBOOST_ROOT=/usr/local/boost -DACTIVE_NETWORK=cga_beta_network .
-make cga_node %{?_smp_mflags}
+make cga_node_beta %{?_smp_mflags}
 
 %install
 if [ ! %{buildroot} = "/" ]; then %{__rm} -rf %{buildroot}; fi
 mkdir -p %{buildroot}/usr/bin
 mkdir -p %{buildroot}/etc/systemd/system/
-cp cga_node %{buildroot}/usr/bin/cga_node-beta
+cp cga_node_beta %{buildroot}/usr/bin/cga_node-beta
 cp etc/systemd/cgacoin-beta.service %{buildroot}/etc/systemd/system/cgacoin-beta.service
 
 %clean
