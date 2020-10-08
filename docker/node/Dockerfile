@@ -14,15 +14,15 @@ ADD ./ /tmp/src
 RUN mkdir /tmp/build && \
     cd /tmp/build && \
     cmake /tmp/src -DBOOST_ROOT=${BOOST_ROOT} -DACTIVE_NETWORK=cga_${NETWORK}_network && \
-    make cga_node && \
+    make cga_node_beta && \
     cd .. && \
     echo ${NETWORK} > /etc/cga-network
 
 FROM ubuntu:16.04
-COPY --from=0 /tmp/build/cga_node /usr/bin
+COPY --from=0 /tmp/build/cga_node_beta /usr/bin
 COPY --from=0 /etc/cga-network /etc
 COPY docker/node/entry.sh /entry.sh
 COPY docker/node/config /usr/share/cga/config
 RUN chmod +x /entry.sh
-RUN ln -s /usr/bin/cga_node /usr/bin/rai_node
+RUN ln -s /usr/bin/cga_node_beta /usr/bin/rai_node
 CMD ["/bin/bash",  "/entry.sh"]

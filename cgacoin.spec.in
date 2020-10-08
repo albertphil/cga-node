@@ -33,13 +33,13 @@ fi
 
 %build
 cmake -DCMAKE_VERBOSE_MAKEFILE=ON -DBOOST_ROOT=/usr/local/boost .
-make cga_node %{?_smp_mflags}
+make cga_node %{?_smp_mflags}_beta
 
 %install
 if [ ! %{buildroot} = "/" ]; then %{__rm} -rf %{buildroot}; fi
 mkdir -p %{buildroot}/usr/bin
 mkdir -p %{buildroot}/etc/systemd/system/
-cp cga_node %{buildroot}/usr/bin/cga_node
+cp cga_node %{buildroot}/usr/bin/cga_node_beta
 cp etc/systemd/cgacoin.service %{buildroot}/etc/systemd/system/cgacoin.service
 
 %clean
@@ -47,7 +47,7 @@ if [ ! %{buildroot} = "/" ]; then %{__rm} -rf %{buildroot}; fi
 
 %files
 %defattr(755,root,root)
-%{_bindir}/cga_node
+%{_bindir}/cga_node_beta
 %attr(644,root,root) /etc/systemd/system/cgacoin.service
 
 %pre

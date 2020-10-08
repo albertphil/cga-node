@@ -60,7 +60,7 @@ while true; do
 				fi
 			done
 
-			cga_node --vacuum
+			cga_node_beta --vacuum
 		fi
 	fi
 
@@ -71,7 +71,7 @@ while true; do
 	fi
 
 	if [ -z "${pid}" ]; then
-		cga_node --daemon &
+		cga_node_beta --daemon &
 		pid="$!"
 	fi
 

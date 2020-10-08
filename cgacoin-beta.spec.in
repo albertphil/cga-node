@@ -39,7 +39,7 @@ make cga_node_beta %{?_smp_mflags}
 if [ ! %{buildroot} = "/" ]; then %{__rm} -rf %{buildroot}; fi
 mkdir -p %{buildroot}/usr/bin
 mkdir -p %{buildroot}/etc/systemd/system/
-cp cga_node_beta %{buildroot}/usr/bin/cga_node-beta
+cp cga_node_beta %{buildroot}/usr/bin/cga_node_beta
 cp etc/systemd/cgacoin-beta.service %{buildroot}/etc/systemd/system/cgacoin-beta.service
 
 %clean
@@ -47,7 +47,7 @@ if [ ! %{buildroot} = "/" ]; then %{__rm} -rf %{buildroot}; fi
 
 %files
 %defattr(755,root,root)
-%{_bindir}/cga_node-beta
+%{_bindir}/cga_node_beta
 %attr(644,root,root) /etc/systemd/system/cgacoin-beta.service
 
 %pre

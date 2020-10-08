@@ -275,7 +275,7 @@ target_compile_definitions(blake2 PRIVATE -D__SSE2__)
 add_subdirectory(cga/secure)
 add_subdirectory(cga/lib)
 add_subdirectory(cga/node)
-add_subdirectory(cga/cga_node)
+add_subdirectory(cga/cga_node_beta)
 
 if (CGA_TEST)
     if(WIN32)

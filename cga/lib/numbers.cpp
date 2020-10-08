@@ -77,7 +77,7 @@ void cga::uint256_union::encode_account (std::string & destination_a) const
 		number_l >>= 5;
 		destination_a.push_back (account_encode (r));
 	}
-	destination_a.append ("_agc"); // cga_
+	destination_a.append ("_bagc"); // cgab_
 	std::reverse (destination_a.begin (), destination_a.end ());
 }
 
@@ -93,9 +93,9 @@ bool cga::uint256_union::decode_account (std::string const & source_a)
 	auto error (source_a.size () < 5);
 	if (!error)
 	{
-		auto cga_prefix (source_a[0] == 'c' && source_a[1] == 'g' && source_a[2] == 'a' && (source_a[3] == '_' || source_a[3] == '-'));
+		auto cga_prefix (source_a[0] == 'c' && source_a[1] == 'g' && source_a[2] == 'a' && source_a[3] == 'b' && (source_a[4] == '_' || source_a[4] == '-'));
 		
-		error = (cga_prefix && source_a.size () != 64);
+		error = (cga_prefix && source_a.size () != 65);
 		if (!error)
 		{
 			if (cga_prefix)

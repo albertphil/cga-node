@@ -6,7 +6,7 @@ After=network.target
 Type=simple
 User=cgacoin
 WorkingDirectory=/var/cgacoin/CGABeta
-ExecStart=/usr/bin/cga_node-beta --daemon
+ExecStart=/usr/bin/cga_node_beta --daemon
 Restart=on-failure
 
 [Install]
