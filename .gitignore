@@ -30,8 +30,8 @@
 core_test
 !core_test/
 qt_test
-!cga_node/
-!cga_wallet/
+!cga_node_beta/
+!cga_wallet_beta/
 slow_test
 
 # IDEs

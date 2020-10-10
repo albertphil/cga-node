@@ -1,7 +1,7 @@
 #include <cga/lib/errors.hpp>
 #include <cga/lib/jsonconfig.hpp>
 #include <cga/lib/utility.hpp>
-#include <cga/cga_wallet/icon.hpp>
+#include <cga/cga_wallet_beta/icon.hpp>
 #include <cga/node/cli.hpp>
 #include <cga/node/ipc.hpp>
 #include <cga/node/rpc.hpp>

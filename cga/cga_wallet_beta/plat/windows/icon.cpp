@@ -1,4 +1,4 @@
-#include <cga/cga_wallet/icon.hpp>
+#include <cga/cga_wallet_beta/icon.hpp>
 
 #include <QApplication>
 #include <QtGui>

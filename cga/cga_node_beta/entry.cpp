@@ -1,5 +1,5 @@
 #include <cga/lib/utility.hpp>
-#include <cga/cga_node/daemon.hpp>
+#include <cga/cga_node_beta/daemon.hpp>
 #include <cga/node/cli.hpp>
 #include <cga/node/node.hpp>
 #include <cga/node/rpc.hpp>

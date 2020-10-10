@@ -330,13 +330,13 @@ if (CGA_GUI)
 	endif ()
 
 	if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-		set (PLATFORM_WALLET_SOURCE cga/cga_wallet/plat/default/icon.cpp)
+		set (PLATFORM_WALLET_SOURCE cga/cga_wallet_beta/plat/default/icon.cpp)
 	elseif (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
-		set (PLATFORM_WALLET_SOURCE cga/cga_wallet/plat/windows/icon.cpp CGA.rc)
+		set (PLATFORM_WALLET_SOURCE cga/cga_wallet_beta/plat/windows/icon.cpp CGA.rc)
 	elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-		set (PLATFORM_WALLET_SOURCE cga/cga_wallet/plat/default/icon.cpp)
+		set (PLATFORM_WALLET_SOURCE cga/cga_wallet_beta/plat/default/icon.cpp)
 	elseif (${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
-		set (PLATFORM_WALLET_SOURCE cga/cga_wallet/plat/default/icon.cpp)
+		set (PLATFORM_WALLET_SOURCE cga/cga_wallet_beta/plat/default/icon.cpp)
 	else ()
 		error ("Unknown platform: ${CMAKE_SYSTEM_NAME}")
 	endif ()
@@ -345,8 +345,8 @@ if (CGA_GUI)
 
 	add_executable (cga_wallet ${PLATFORM_GUI_TARGET_PROPERTIES}
 		${PLATFORM_WALLET_SOURCE}
-		cga/cga_wallet/entry.cpp
-		cga/cga_wallet/icon.hpp
+		cga/cga_wallet_beta/entry.cpp
+		cga/cga_wallet_beta/icon.hpp
 		${RES})
 
 	target_link_libraries (cga_wallet
@@ -357,7 +357,7 @@ if (CGA_GUI)
 		target_link_libraries (cga_wallet Qt5::WinExtras)
 		# cga_wallet.com executable for Windows console
 		add_executable(cga_wallet_com
-			cga/cga_wallet/entry_com.cpp)
+			cga/cga_wallet_beta/entry_com.cpp)
 		target_link_libraries (cga_wallet_com
 			node)
 		set_target_properties (cga_wallet_com PROPERTIES COMPILE_FLAGS "-DBOOST_ASIO_HAS_STD_ARRAY=1" OUTPUT_NAME "cga_wallet" SUFFIX ".com")
