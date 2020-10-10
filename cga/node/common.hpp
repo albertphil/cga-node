@@ -195,7 +195,7 @@ public:
 	bool deserialize (cga::stream &);
 	cga::block_type block_type () const;
 	void block_type_set (cga::block_type);
-	static std::array<uint8_t, 2> constexpr magic_number = cga::is_test_network ? std::array<uint8_t, 2>{ { 'X', 'T' } } : cga::is_beta_network ? std::array<uint8_t, 2>{ { 'X', 'B' } } : std::array<uint8_t, 2>{ { 'X', 'Q' } };
+	static std::array<uint8_t, 2> constexpr magic_number = cga::is_test_network ? std::array<uint8_t, 2>{ { 'X', 'T' } } : cga::is_beta_network ? std::array<uint8_t, 2>{ { 'X', 'C' } } : std::array<uint8_t, 2>{ { 'X', 'Q' } };
 	uint8_t version_max;
 	uint8_t version_using;
 	uint8_t version_min;

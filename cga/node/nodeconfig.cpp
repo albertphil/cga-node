@@ -8,7 +8,7 @@ namespace
 {
 const char * preconfigured_peers_key = "preconfigured_peers";
 const char * signature_checker_threads_key = "signature_checker_threads";
-const char * default_beta_peer_network = "peering-beta.cgaco.net";
+const char * default_beta_peer_network = "peering-betav4.cgaco.net";
 const char * default_live_peer_network = "peering.cgaco.net";
 }
 
@@ -53,11 +53,7 @@ unchecked_cutoff_time (std::chrono::seconds (4 * 60 * 60)) // 4 hours
 		case cga::cga_networks::cga_beta_network:
 			enable_voting = true;
 			preconfigured_peers.push_back (default_beta_peer_network);
-			preconfigured_representatives.emplace_back ("7D8816963435211531B6D92CC0BB8EF2BA3EC5E2C7389543190E41BB2AD9F38E");
-			preconfigured_representatives.emplace_back ("2BBEC435D56BD04E9C7D640CA73784539A05E6AB83F66967546FFAC83834FA2E");
-			preconfigured_representatives.emplace_back ("39F81A47D7C173D2E94035AE021B20383431F76F4FC682205DCBD913715D3185");
-			preconfigured_representatives.emplace_back ("E3F311552309D532AEA2B52FBC029AC9FD153AF1E032523FA1F32F177883DABB");
-			preconfigured_representatives.emplace_back ("88B9F194D41B18B17DE04126BD053FB17077E0B355D63481980D66344894CCC7");
+			preconfigured_representatives.emplace_back ("73272FF4978B0FF29717A55062BDF0608E22D72DE4636126864069D879EB6132");
 			break;
 		case cga::cga_networks::cga_live_network:
 			enable_voting = true;
