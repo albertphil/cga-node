@@ -18,7 +18,7 @@ namespace
 {
 char const * test_private_key_data = "09D4F6628BBC2E3C62471F11F22353593281A2BD132063D63FD63FB2AF24B51C";
 char const * test_public_key_data = "60F11CABC4C835910115DE329325B0CE5C1FA945AB808B53A17CCC0747577C72"; // xpd_1r9j5kowbk3ok61jdqjkkeku3mkw5ynndcw1jfbt4z8e1x5ogz5kd86ex4cs
-char const * beta_public_key_data = "42F92C513EF9E8DA5CEBB88CCE01E0C591C21605BD0870CBF197EB61D896906E"; // cga_1iqs7jamxyhaubggqg6esr1y3jejrad1dhaag57z57zde9ebf65gfm69w4c5
+char const * beta_public_key_data = "8E2E9BFE6D7A039CB657811F214C746E0162B9A5E181ECFEA1B6EB734A45789B"; // cgab_35jgmhz8tyi5mku7h1az6789aui3ecwtdre3xmzc5fqdgf76cy6uj4dpf7zs
 char const * live_public_key_data = "2656755701A95EEE757425A850E02743BF5E95FFCC980EEDE55FEA59D25C6247"; // cga_1bkpgodi5ccyxstqabfac5i4gixzdtczzm6r3upycqzcd9b7rrk9ya83o19s
 char const * test_genesis_data = R"%%%({
 	"type": "open",
@@ -31,11 +31,11 @@ char const * test_genesis_data = R"%%%({
 
 char const * beta_genesis_data = R"%%%({
         "type": "open",
-        "source": "42F92C513EF9E8DA5CEBB88CCE01E0C591C21605BD0870CBF197EB61D896906E",
-        "representative": "cga_1iqs7jamxyhaubggqg6esr1y3jejrad1dhaag57z57zde9ebf65gfm69w4c5",
-        "account": "cga_1iqs7jamxyhaubggqg6esr1y3jejrad1dhaag57z57zde9ebf65gfm69w4c5",
-        "work": "967ebd8cb9122ec3",
-        "signature": "831F0336C35ADB532CDBA86B20EB68E6921A7C91F0800425F0A70BC5CAD9EC292C9C13DA4142A1EC301C4EF4CE99ABADEC339BBD7E14DB7DD5274AA8355E6B05"
+        "source": "8E2E9BFE6D7A039CB657811F214C746E0162B9A5E181ECFEA1B6EB734A45789B",
+        "representative": "cgab_35jgmhz8tyi5mku7h1az6789aui3ecwtdre3xmzc5fqdgf76cy6uj4dpf7zs",
+        "account": "cgab_35jgmhz8tyi5mku7h1az6789aui3ecwtdre3xmzc5fqdgf76cy6uj4dpf7zs",
+        "work": "4f3a946a6e992cb3",
+        "signature": "DF803FD406967044ABCC0851BDD2EF881C3B484C9C075B0208B9D250161B14E9C10D3FAB5C489BA054A748403957997AC55FB2B5540DC5FEE995CC80CE3AEF00"
 })%%%";
 
 char const * live_genesis_data = R"%%%({
