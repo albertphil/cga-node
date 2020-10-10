@@ -39,5 +39,5 @@ after_build:
 artifacts:
 - path: cga*.zip
   name: cga_release_%network%
-- path: CGA_Installer-*_%network%.exe
+- path: CGA_Installer-*%network%.exe
   name: CGA_Installer_%network%

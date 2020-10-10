@@ -100,7 +100,8 @@ bool cga::uint256_union::decode_account (std::string const & source_a)
 		{
 			if (cga_prefix)
 			{
-				auto i (source_a.begin () + (cga_prefix ? 4 : 5));
+				// auto i (source_a.begin () + (cga_prefix ? 4 : 5));
+				auto i (source_a.begin () + 5);
 				if (*i == '1' || *i == '3')
 				{
 					cga::uint512_t number_l;
