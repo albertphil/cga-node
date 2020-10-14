@@ -15,7 +15,7 @@ enum class cga_networks
 	cga_test_network = 0,
 	
 	// Normal work parameters, secret beta genesis key, beta IP ports
-	cga_beta_network = 18,
+	cga_beta_network = 17,
 	
 	// Normal work parameters, secret live key, live IP ports
 	cga_live_network = 3,
