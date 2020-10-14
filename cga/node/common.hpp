@@ -211,7 +211,7 @@ public:
 	static std::bitset<16> constexpr block_type_mask = std::bitset<16> (0x0f00);
 	bool valid_magic () const
 	{
-		return magic_number[0] == 'X' && (magic_number[1] == 'T' || magic_number[1] == 'B' || magic_number[1] == 'Q');
+		return magic_number[0] == 'X' && (magic_number[1] == 'T' || magic_number[1] == 'C' || magic_number[1] == 'Q');
 	}
 	bool valid_network () const
 	{
