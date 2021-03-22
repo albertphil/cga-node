@@ -1,3 +1,6 @@
+Forked from [nanocurrency/nano-node](https://github.com/nanocurrency/nano-node)
+
+
 <div align="center">
     <img src="images/cgalogo.png" alt="Logo" width='150px' height='auto'/>
 </div>
