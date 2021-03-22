@@ -5,7 +5,11 @@ Forked from [nanocurrency/nano-node](https://github.com/nanocurrency/nano-node)
     <img src="images/cgalogo.png" alt="Logo" width='150px' height='auto'/>
 </div>
 
-# What is CGA?
+# CGA NODE
+
+[![Pipeline](https://gitlab.com/cgacurrency/cga-node/badges/v18/pipeline.svg)](https://gitlab.com/cgacurrency/cga-node)
+
+## What is CGA?
 CGA is a digital payment protocol designed to be accessible and lightweight, with a focus on removing inefficiencies present in other cryptocurrencies. With ultrafast transactions and zero fees on a secure, green and decentralized network, this makes CGA ideal for everyday transactions.
 
 
