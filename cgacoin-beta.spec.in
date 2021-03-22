@@ -1,0 +1,63 @@
+Name:                   cgacoin-beta
+Version:                @VERSION@ 
+Release:                @RELEASE@%{?dist}
+Summary:                CGAcurrency Beta Daemon
+License:                BSD-2-Clause
+URL:                    https://cgaio.com/
+Requires(pre):          /usr/sbin/useradd, /usr/bin/getent
+Requires(postun):       /usr/sbin/userdel
+BuildRequires:          make, libstdc++-static, glibc-devel, glibc-headers
+Source:                 cga-%{version}.tar.gz
+
+%description
+This is cgacoin daemon.  CGA is a digital currency that is
+peer-to-peer, decentralized, and trustless. This package includes
+the cga daemon, and a service.
+
+%prep
+if [ ! -x "$(which cmake)" ]; then
+	echo "cmake must exist, try:" >&2
+	echo "      scl enable llvm-toolset-7 devtoolset-7 'rpmbuild ...'" >&2
+	exit 1
+fi
+if cc --std=c++14 --version 2>&1 >/dev/null | grep '^' >/dev/null; then
+	echo "Unsupported C++ compiler, try:" >&2
+	echo "      scl enable llvm-toolset-7 devtoolset-7 'rpmbuild ...'" >&2
+	exit 1
+fi
+if test ! -d /usr/local/boost; then
+	echo "Boost should be in /usr/local/boost" >&2
+	exit 1
+fi
+%autosetup -n cga-%{version}
+
+%build
+cmake -DCMAKE_VERBOSE_MAKEFILE=ON -DBOOST_ROOT=/usr/local/boost -DACTIVE_NETWORK=cga_beta_network .
+make cga_node %{?_smp_mflags}
+
+%install
+if [ ! %{buildroot} = "/" ]; then %{__rm} -rf %{buildroot}; fi
+mkdir -p %{buildroot}/usr/bin
+mkdir -p %{buildroot}/etc/systemd/system/
+cp cga_node %{buildroot}/usr/bin/cga_node-beta
+cp etc/systemd/cgacoin-beta.service %{buildroot}/etc/systemd/system/cgacoin-beta.service
+
+%clean
+if [ ! %{buildroot} = "/" ]; then %{__rm} -rf %{buildroot}; fi
+
+%files
+%defattr(755,root,root)
+%{_bindir}/cga_node-beta
+%attr(644,root,root) /etc/systemd/system/cgacoin-beta.service
+
+%pre
+PATH="/usr/bin:/usr/sbin:/bin:/sbin:${PATH}"; export PATH
+mkdir -p /var/cgacoin/CGABeta
+getent group cgacoin >/dev/null || groupadd --system cgacoin || exit 1
+getent passwd cgacoin >/dev/null || useradd --system --create-home --home-dir /var/cgacoin --shell /bin/bash --comment "cgacoin Daemon user" --gid cgacoin cgacoin || exit 1
+chown -R cgacoin:cgacoin /var/cgacoin
+chmod 700 /var/cgacoin
+
+%postun
+PATH="/usr/bin:/usr/sbin:/bin:/sbin:${PATH}"; export PATH
+userdel cgacoin >/dev/null 2>/dev/null || :

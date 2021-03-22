@@ -12,20 +12,20 @@ mkdir build
 pushd build
 
 if [[ ${ASAN_INT-0} -eq 1 ]]; then
-    SANITIZERS="-DXPD_ASAN_INT=ON"
+    SANITIZERS="-DCGA_ASAN_INT=ON"
 elif [[ ${ASAN-0} -eq 1 ]]; then
-    SANITIZERS="-DXPD_ASAN=ON"
+    SANITIZERS="-DCGA_ASAN=ON"
 elif [[ ${TSAN-0} -eq 1 ]]; then
-    SANITIZERS="-DXPD_TSAN=ON"
+    SANITIZERS="-DCGA_TSAN=ON"
 else
     SANITIZERS=""
 fi
 
 cmake \
     -G'Unix Makefiles' \
-    -DACTIVE_NETWORK=xpd_test_network \
-    -DXPD_TEST=ON \
-    -DXPD_GUI=ON \
+    -DACTIVE_NETWORK=cga_test_network \
+    -DCGA_TEST=ON \
+    -DCGA_GUI=ON \
     -DCMAKE_BUILD_TYPE=Debug \
     -DCMAKE_VERBOSE_MAKEFILE=ON \
     -DBOOST_ROOT=/usr/local \
@@ -46,6 +46,6 @@ popd
 pushd load-tester
 cargo build --release
 popd
-cp ./load-tester/target/release/xpeed-load-tester ./build/load_test
+cp ./load-tester/target/release/cga-load-tester ./build/load_test
 
 ./ci/test.sh ./build

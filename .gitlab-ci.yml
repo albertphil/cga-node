@@ -1,4 +1,4 @@
-## Xpeed CI config
+## CGA CI config
 
 image: ubuntu:xenial
 

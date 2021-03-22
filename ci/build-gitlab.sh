@@ -6,7 +6,7 @@ DISTRO_CFG=""
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
     CPACK_TYPE="TBZ2"
     distro=$(lsb_release -i -c -s|tr '\n' '_')
-    DISTRO_CFG="-DXPD_DISTRO_NAME=${distro}"
+    DISTRO_CFG="-DCGA_DISTRO_NAME=${distro}"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     CPACK_TYPE="DragNDrop"
 elif [[ "$OSTYPE" == "cygwin" ]]; then
@@ -17,13 +17,13 @@ elif [[ "$OSTYPE" == "win32" ]]; then
     CPACK_TYPE="NSIS"
 elif [[ "$OSTYPE" == "freebsd"* ]]; then
     CPACK_TYPE="TBZ2"
-    DISTRO_CFG="-DXPD_DISTRO_NAME='freebsd'"
+    DISTRO_CFG="-DCGA_DISTRO_NAME='freebsd'"
 else
     CPACK_TYPE="TBZ2"
 fi
 
 if [[ ${SIMD} -eq 1 ]]; then
-    SIMD_CFG="-DXPD_SIMD_OPTIMIZATIONS=ON"
+    SIMD_CFG="-DCGA_SIMD_OPTIMIZATIONS=ON"
     echo SIMD and other optimizations enabled
     echo local CPU:
     cat /proc/cpuinfo # TBD for macOS
@@ -32,11 +32,11 @@ else
 fi
 
 if [[ ${ASAN_INT} -eq 1 ]]; then
-    SANITIZERS="-DXPD_ASAN_INT=ON"
+    SANITIZERS="-DCGA_ASAN_INT=ON"
 elif [[ ${ASAN} -eq 1 ]]; then
-    SANITIZERS="-DXPD_ASAN=ON"
+    SANITIZERS="-DCGA_ASAN=ON"
 elif [[ ${TSAN} -eq 1 ]]; then
-    SANITIZERS="-DXPD_TSAN=ON"
+    SANITIZERS="-DCGA_TSAN=ON"
 else
     SANITIZERS=""
 fi
@@ -52,7 +52,7 @@ if [[ ${FLAVOR-_} == "_" ]]; then
     FLAVOR=""
 fi
 
-NETWORK_CFG="-DACTIVE_NETWORK=xpd_live_network"
+NETWORK_CFG="-DACTIVE_NETWORK=cga_live_network"
 CONFIGURATION="Release"
 
 
@@ -64,7 +64,7 @@ run_build() {
     mkdir ${build_dir}
     cd ${build_dir}
     cmake -GNinja \
-       -DXPD_GUI=ON \
+       -DCGA_GUI=ON \
        -DCMAKE_BUILD_TYPE=${CONFIGURATION} \
        -DCMAKE_VERBOSE_MAKEFILE=ON \
        -DCMAKE_INSTALL_PREFIX="../install" \

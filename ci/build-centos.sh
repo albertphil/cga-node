@@ -9,13 +9,13 @@ run_source() {
 
 run_build() {
     mkdir -p ~/rpmbuild/SOURCES/
-    mv -f ~/xpeed-${VERSIONS}.tar.gz ~/rpmbuild/SOURCES/.
-    scl enable llvm-toolset-7 devtoolset-7 'rpmbuild -ba xpeedcoin.spec'
-    scl enable llvm-toolset-7 devtoolset-7 'rpmbuild -ba xpeedcoin-beta.spec'
+    mv -f ~/cga-${VERSIONS}.tar.gz ~/rpmbuild/SOURCES/.
+    scl enable llvm-toolset-7 devtoolset-7 'rpmbuild -ba cgacoin.spec'
+    scl enable llvm-toolset-7 devtoolset-7 'rpmbuild -ba cgacoin-beta.spec'
 }
 
 run_update() {
-    for file in ./xpeedcoin*.in; do
+    for file in ./cgacoin*.in; do
 	outfile="$(echo "${file}" | sed 's@\.in$@@')"
     
     	echo "Updating \"${outfile}\"..."
