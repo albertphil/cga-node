@@ -35,9 +35,9 @@ using uint256_t = boost::multiprecision::uint256_t;
 using uint512_t = boost::multiprecision::uint512_t;
 // SI dividers
 cga::uint128_t const Gcga_ratio = cga::uint128_t ("1000000000000000000000000000000000"); // 10^33
-cga::uint128_t const Mcga_ratio = cga::uint128_t ("1000000000000000000000000000000"); // 10^30
+cga::uint128_t const Mcga_ratio = cga::uint128_t ("100000000000000000000000000000"); // 10^29
 cga::uint128_t const kcga_ratio = cga::uint128_t ("1000000000000000000000000000"); // 10^27
-cga::uint128_t const cga_ratio = cga::uint128_t ("100000000000000000000000"); // 10^23 //발행량조절
+cga::uint128_t const cga_ratio = cga::uint128_t ("100000000000000000000000"); // 10^23
 cga::uint128_t const mcga_ratio = cga::uint128_t ("1000000000000000000000"); // 10^21
 cga::uint128_t const ucga_ratio = cga::uint128_t ("1000000000000000000"); // 10^18
 
